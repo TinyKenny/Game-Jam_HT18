@@ -5,14 +5,11 @@ using UnityEngine;
 public class CameraControls : MonoBehaviour {
 
     public Transform player;
-
-    private bool hasPlayer = true;
-    private float distanceFromPlayer = 10.0f;
     [Range(0.0f, 1.0f)]
     public float angle = 0.0f;
+    public float distanceFromPlayer = 10.0f;
 
-
-    private Vector3 temp_distanceFromPlayer = new Vector3(0.0f, 0.0f, 10.0f);
+    private bool hasPlayer = true;
 
 	// Use this for initialization
 	void Start () {
@@ -21,23 +18,14 @@ public class CameraControls : MonoBehaviour {
             hasPlayer = false;
             Debug.LogError("Camera does not have an object to track");
         }
-        testThingy();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (hasPlayer)
         {
-            //transform.position = player.position - temp_distanceFromPlayer;
-            transform.position = player.position - new Vector3(0.0f, -distanceFromPlayer * angle, distanceFromPlayer * (1.0f - angle));
+            transform.position = player.position - new Vector3(0.0f, -distanceFromPlayer * Mathf.Sin(Mathf.PI * 0.5f * angle), distanceFromPlayer * Mathf.Cos(Mathf.PI * 0.5f * angle));
             transform.LookAt(player);
         }
-        Debug.Log(Vector3.Distance(transform.position, player.position));
 	}
-
-    void testThingy()
-    {
-        Debug.Log("Testing!");
-        return;
-    }
 }
