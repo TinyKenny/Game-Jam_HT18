@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraControls : MonoBehaviour {
 
     public Transform player;
-    [Range(0.0f, 1.0f)]
+    [Range(-2.0f, 2.0f)]
     public float angle = 0.0f;
     public float distanceFromPlayer = 10.0f;
 
@@ -24,7 +24,8 @@ public class CameraControls : MonoBehaviour {
 	void Update () {
         if (hasPlayer)
         {
-            transform.position = player.position - new Vector3(0.0f, -distanceFromPlayer * Mathf.Sin(Mathf.PI * 0.5f * angle), distanceFromPlayer * Mathf.Cos(Mathf.PI * 0.5f * angle));
+            float radAngle = Mathf.PI * angle;
+            transform.position = player.position - new Vector3(0.0f, -distanceFromPlayer * Mathf.Sin(radAngle), distanceFromPlayer * Mathf.Cos(radAngle));
             transform.LookAt(player);
         }
 	}
