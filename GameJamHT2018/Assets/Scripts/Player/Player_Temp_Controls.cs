@@ -5,10 +5,11 @@ using UnityEngine;
 public class Player_Temp_Controls : MonoBehaviour { //this only exists to test the camera script
 
     public LayerMask groundLayer;
-    public GameObject thingToMake;
+    public GameObject destinationMarkerPrefab;
 
     private float movementSpeed = 5.0f;
     private Vector3 targetDestination;
+    private GameObject targetDestinationMarker;
 
 
 	// Use this for initialization
@@ -31,12 +32,15 @@ public class Player_Temp_Controls : MonoBehaviour { //this only exists to test t
 
             transform.LookAt(targetDestination);
 
-            //Instantiate(thingToMake, targetDestination, Quaternion.identity);
+            targetDestinationMarker = Instantiate(destinationMarkerPrefab, targetDestination, Quaternion.identity);
         }
 
         if (Vector3.Distance(transform.position, targetDestination) > 0.1f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetDestination, movementSpeed * Time.deltaTime);
+        } else if (targetDestinationMarker != null)
+        {
+            Destroy(targetDestinationMarker);
         }
 	}
 }

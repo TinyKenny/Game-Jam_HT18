@@ -391,7 +391,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  thingToMake: {fileID: 1510888578890744, guid: dc55fc655e3900c46a68764481877e9c,
+  destinationMarkerPrefab: {fileID: 1510888578890744, guid: dc55fc655e3900c46a68764481877e9c,
     type: 2}
 --- !u!136 &675403101
 CapsuleCollider:
