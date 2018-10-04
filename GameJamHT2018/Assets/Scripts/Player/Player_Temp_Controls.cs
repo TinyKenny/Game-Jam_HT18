@@ -4,22 +4,39 @@ using UnityEngine;
 
 public class Player_Temp_Controls : MonoBehaviour { //this only exists to test the camera script
 
+    public LayerMask groundLayer;
+    public GameObject thingToMake;
+
     private float movementSpeed = 5.0f;
+    private Vector3 targetDestination;
 
 
 	// Use this for initialization
 	void Start () {
-		
+        targetDestination = transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        float horizontalMovement = Input.GetAxis("Horizontal");
-        float verticalMovement = Input.GetAxis("Vertical");
-
-		if (Mathf.Abs(horizontalMovement) >= 0.0f || Mathf.Abs(verticalMovement) >= 0.0f)
+        if (Input.GetMouseButtonDown(0))
         {
-            transform.Translate(new Vector3(horizontalMovement, 0.0f, verticalMovement) * movementSpeed * Time.deltaTime);
+            Camera cam = Camera.main;
+            Vector2 mousePos = Input.mousePosition;
+
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit, groundLayer);
+            Debug.Log(hit.point);
+            targetDestination = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+
+            transform.LookAt(targetDestination);
+
+            //Instantiate(thingToMake, targetDestination, Quaternion.identity);
+        }
+
+        if (Vector3.Distance(transform.position, targetDestination) > 0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetDestination, movementSpeed * Time.deltaTime);
         }
 	}
 }
