@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 675403102}
   - component: {fileID: 675403101}
   - component: {fileID: 675403100}
+  - component: {fileID: 675403105}
   m_Layer: 0
   m_Name: Camera_tester
   m_TagString: Untagged
@@ -383,7 +384,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 675403099}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c132e40ec2059644eaf8a48bc11dca5d, type: 3}
   m_Name: 
@@ -461,3 +462,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &675403105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 675403099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a7d297a9fe70d4da3997451695a985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _states:
+  - {fileID: 11400000, guid: d54652a2ef8ffbf4c8dc28646a5dcda6, type: 2}
+  - {fileID: 11400000, guid: 7c690875c85a7b64787f9b2575761ccc, type: 2}
+  CurrentState: {fileID: 0}
+  MaxSpeed: 5
+  CollisionLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  Gravity: 0
+  collider: {fileID: 0}
+  Velocity: {x: 0, y: 0}
+  GroundCheckDistance: 0
+  InputMagnitudeToMove: 0
+  SlopeAngles:
+    Min: 0
+    Max: 0
+  DestinationMarkerPrefab: {fileID: 1510888578890744, guid: dc55fc655e3900c46a68764481877e9c,
+    type: 2}
+  TargetDestination: {x: 0, y: 0, z: 0}
+  TargetDestinationMarker: {fileID: 0}

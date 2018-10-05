@@ -24,10 +24,10 @@ public class Player_Temp_Controls : MonoBehaviour { //this only exists to test t
             Camera cam = Camera.main;
             Vector2 mousePos = Input.mousePosition;
 
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            Ray ray = cam.ScreenPointToRay(mousePos);
             RaycastHit hit;
             Physics.Raycast(ray, out hit, groundLayer);
-            Debug.Log(hit.point);
+            
             targetDestination = new Vector3(hit.point.x, transform.position.y, hit.point.z);
 
             transform.LookAt(targetDestination);
