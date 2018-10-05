@@ -41,8 +41,9 @@ public class PlayerController : Controller {
             Debug.Log(Hit.collider.CompareTag("Ground"));
             if (Hit.collider.CompareTag("Ground"))
             {
-                Vector3 Target = new Vector3(Hit.point.x, Hit.point.y + 1.0f, Hit.point.z);
+                Vector3 Target = new Vector3(Hit.point.x, transform.position.y, Hit.point.z);
                 SetTargetDestination(Target);
+                transform.LookAt(TargetDestination);
             }
         }
     }
@@ -72,12 +73,27 @@ public class PlayerController : Controller {
         SetTargetDestination(transform.position);
         DestroyDestinationMarker();
     }
+    
     /*
     public RaycastHit[] DetectHits(bool addGroundCheck = false)
     {
         Vector3 Direction = Velocity.normalized;
         float distance = Velocity.magnitude * Time.deltaTime;
-        Vector3 position = transform.position + (Vector3) Collider.offset;
+        Vector3 position1 = transform.position + Collider.center + Vector3.up * -Collider.height * 0.5f;
+        Vector3 Position2 = position1 + Vector3.up * Collider.height;
+        //List<RaycastHit> hits = Physics.CapsuleCastAll(position1, Position2, Collider.radius, Direction, distance);
+        RaycastHit[] hitsArray = Physics.CapsuleCastAll(position1, Position2, Collider.radius, Direction, distance);
+        List<RaycastHit> hits = new List<RaycastHit>();
+        foreach (RaycastHit hit in hitsArray)
+        {
+            hits.Add(hit);
+        }
+        RaycastHit[] groundHits = Physics.CapsuleCastAll(position1, Position2, Collider.radius, Vector3.down, 1.0f);
+        for(int i = 0; i < hits.Count; i++)
+        {
+            RaycastHit saftyHit = Physics.Linecast(position1, hits[i].point);
+        }
     }
     */
+    
 }
