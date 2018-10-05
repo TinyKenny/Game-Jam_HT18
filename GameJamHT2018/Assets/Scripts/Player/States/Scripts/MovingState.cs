@@ -50,6 +50,13 @@ public class MovingState : State {
 
     private void UpdateTargetDestination()
     {
+        _controller.UpdateTargetDestination();
+    }
+
+
+    /*
+    private void UpdateTargetDestination()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 MousePos = Input.mousePosition;
@@ -75,4 +82,5 @@ public class MovingState : State {
         DestroyDestinationMarker();
         TargetDestinationMarker = Instantiate(DestinationMarkerPrefab, TargetDestination, Quaternion.identity);
     }
+    */
 }

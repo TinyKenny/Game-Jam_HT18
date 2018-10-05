@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 675403104}
-  angle: 0.3
+  angle: 0.35
   distanceFromPlayer: 20
 --- !u!1 &624243339
 GameObject:
@@ -478,17 +478,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c690875c85a7b64787f9b2575761ccc, type: 2}
   CurrentState: {fileID: 0}
   MaxSpeed: 5
-  CollisionLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  Gravity: 0
-  collider: {fileID: 0}
-  Velocity: {x: 0, y: 0}
-  GroundCheckDistance: 0
-  InputMagnitudeToMove: 0
-  SlopeAngles:
-    Min: 0
-    Max: 0
+  Velocity: {x: 0, y: 0, z: 0}
+  Cam: {fileID: 0}
   DestinationMarkerPrefab: {fileID: 1510888578890744, guid: dc55fc655e3900c46a68764481877e9c,
     type: 2}
   TargetDestination: {x: 0, y: 0, z: 0}

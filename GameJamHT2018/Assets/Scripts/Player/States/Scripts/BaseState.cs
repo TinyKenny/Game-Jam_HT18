@@ -20,7 +20,7 @@ public class BaseState : State {
     public override void Enter()
     {
         Debug.Log("Entering Base State");
-        TargetDestination = transform.position;
+        ClearTargetDestination();
     }
 
     public override void Update()
@@ -39,6 +39,17 @@ public class BaseState : State {
         Debug.Log("Exiting Base State");
     }
 
+    private void UpdateTargetDestination()
+    {
+        _controller.UpdateTargetDestination();
+    }
+
+    private void ClearTargetDestination()
+    {
+        _controller.ClearTargetDestination();
+    }
+
+    /*
     private void UpdateTargetDestination()
     {
         if (Input.GetMouseButtonDown(0))
@@ -66,4 +77,5 @@ public class BaseState : State {
         DestroyDestinationMarker();
         TargetDestinationMarker = Instantiate(DestinationMarkerPrefab, TargetDestination, Quaternion.identity);
     }
+    */
 }
