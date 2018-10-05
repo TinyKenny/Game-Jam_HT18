@@ -6,11 +6,8 @@ using UnityEngine;
 public class MovingState : State {
     private PlayerController _controller;
 
-    private Camera Cam { get { return _controller.Cam; } }
     private Transform transform { get { return _controller.transform; } }
-    private Vector3 TargetDestination { get { return _controller.TargetDestination; } set { _controller.TargetDestination = value; } }
-    private GameObject TargetDestinationMarker { get { return _controller.TargetDestinationMarker; } set { _controller.TargetDestinationMarker = value; } }
-    private GameObject DestinationMarkerPrefab { get { return _controller.DestinationMarkerPrefab; } set { _controller.DestinationMarkerPrefab = value; } }
+    private Vector3 TargetDestination { get { return _controller.TargetDestination; } }
     private Vector3 Velocity { get { return _controller.Velocity; } set { _controller.Velocity = value; } }
 
     public override void Initialize(Controller owner)
@@ -20,25 +17,25 @@ public class MovingState : State {
 
     public override void Enter()
     {
-        Debug.Log("Entering Moving State");
+        //Debug.Log("Entering Moving State");
     }
 
     public override void Update()
     {
-        if(Vector3.Distance(transform.position, TargetDestination) < MathHelper.FloatEpsilon)
+        if(Vector3.Distance(transform.position, TargetDestination) < MathHelper.FloatEpsilon || Input.GetKeyDown(KeyCode.S)) //Something...
         {
             _controller.TransitionTo<BaseState>();
             return;
         }
         UpdateTargetDestination();
         UpdateMovement();
-
         transform.Translate(Velocity);
     }
 
     public override void Exit()
     {
-        Debug.Log("Exiting Moving State");
+        Velocity = new Vector3(0.0f, 0.0f, 0.0f);
+        //Debug.Log("Exiting Moving State");
     }
 
     private void UpdateMovement()
@@ -47,40 +44,8 @@ public class MovingState : State {
         Velocity = MovementStep - transform.position;
     }
 
-
     private void UpdateTargetDestination()
     {
         _controller.UpdateTargetDestination();
     }
-
-
-    /*
-    private void UpdateTargetDestination()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector2 MousePos = Input.mousePosition;
-            Ray ray = Cam.ScreenPointToRay(MousePos);
-            RaycastHit Hit;
-            Physics.Raycast(ray, out Hit);
-
-            TargetDestination = new Vector3(Hit.point.x, Hit.point.y + 1.0f, Hit.point.z);
-            CreateDestinationMarker();
-        }
-    }
-
-    private void DestroyDestinationMarker()
-    {
-        if (TargetDestinationMarker != null)
-        {
-            Destroy(TargetDestinationMarker);
-        }
-    }
-
-    private void CreateDestinationMarker()
-    {
-        DestroyDestinationMarker();
-        TargetDestinationMarker = Instantiate(DestinationMarkerPrefab, TargetDestination, Quaternion.identity);
-    }
-    */
 }

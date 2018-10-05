@@ -6,11 +6,8 @@ using UnityEngine;
 public class BaseState : State {
     private PlayerController _controller;
 
-    private Camera Cam { get { return _controller.Cam; } }
     private Transform transform { get { return _controller.transform; } }
-    private Vector3 TargetDestination { get { return _controller.TargetDestination; } set { _controller.TargetDestination = value; } }
-    private GameObject TargetDestinationMarker { get { return _controller.TargetDestinationMarker; } set { _controller.TargetDestinationMarker = value; } }
-    private GameObject DestinationMarkerPrefab { get { return _controller.DestinationMarkerPrefab; } set { _controller.DestinationMarkerPrefab = value; } }
+    private Vector3 TargetDestination { get { return _controller.TargetDestination; } }
 
     public override void Initialize(Controller owner)
     {
@@ -19,7 +16,7 @@ public class BaseState : State {
 
     public override void Enter()
     {
-        Debug.Log("Entering Base State");
+        //Debug.Log("Entering Base State");
         ClearTargetDestination();
     }
 
@@ -31,12 +28,11 @@ public class BaseState : State {
             _controller.TransitionTo<MovingState>();
             return;
         }
-
     }
 
     public override void Exit()
     {
-        Debug.Log("Exiting Base State");
+        //Debug.Log("Exiting Base State");
     }
 
     private void UpdateTargetDestination()
@@ -48,34 +44,4 @@ public class BaseState : State {
     {
         _controller.ClearTargetDestination();
     }
-
-    /*
-    private void UpdateTargetDestination()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector2 MousePos = Input.mousePosition;
-            Ray ray = Cam.ScreenPointToRay(MousePos);
-            RaycastHit Hit;
-            Physics.Raycast(ray, out Hit);
-
-            TargetDestination = new Vector3(Hit.point.x, Hit.point.y + 1.0f, Hit.point.z);
-            CreateDestinationMarker();
-        }
-    }
-
-    private void DestroyDestinationMarker()
-    {
-        if(TargetDestinationMarker != null)
-        {
-            Destroy(TargetDestinationMarker);
-        }
-    }
-
-    private void CreateDestinationMarker()
-    {
-        DestroyDestinationMarker();
-        TargetDestinationMarker = Instantiate(DestinationMarkerPrefab, TargetDestination, Quaternion.identity);
-    }
-    */
 }

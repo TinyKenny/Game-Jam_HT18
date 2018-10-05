@@ -19,7 +19,8 @@ public class StunnedState : State {
 
     public override void Update()
     {
-        //there shouldn't really be much happening here...
+        //there shouldn't really be much happening here
+        Exit(); //please change this...
     }
 
     public override void Exit()

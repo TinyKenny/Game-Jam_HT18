@@ -103,9 +103,9 @@ MonoBehaviour:
   CurrentState: {fileID: 0}
   MaxSpeed: 5
   Velocity: {x: 0, y: 0, z: 0}
-  PlayerLayer:
+  MovementLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 513
   Cam: {fileID: 0}
   DestinationMarkerPrefab: {fileID: 1510888578890744, guid: dc55fc655e3900c46a68764481877e9c,
     type: 2}

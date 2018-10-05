@@ -8,7 +8,7 @@ public class PlayerController : Controller {
 
     public float MaxSpeed = 5.0f;
     public Vector3 Velocity;
-    public LayerMask PlayerLayer;
+    public LayerMask MovementLayers;
     /*
     public LayerMask CollisionLayers;
     public float Gravity;
@@ -31,17 +31,19 @@ public class PlayerController : Controller {
 
     public void UpdateTargetDestination()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) //Something...
         {
             Vector2 MousePos = Input.mousePosition;
             Ray ray = Cam.ScreenPointToRay(MousePos);
             RaycastHit Hit;
-            Physics.Raycast(ray, out Hit, PlayerLayer);
+            Physics.Raycast(ray, out Hit, Mathf.Infinity, MovementLayers, QueryTriggerInteraction.UseGlobal);
 
-            Debug.Log(Hit.collider);
-
-            Vector3 Target = new Vector3(Hit.point.x, Hit.point.y + 1.0f, Hit.point.z);
-            SetTargetDestination(Target);
+            Debug.Log(Hit.collider.CompareTag("Ground"));
+            if (Hit.collider.CompareTag("Ground"))
+            {
+                Vector3 Target = new Vector3(Hit.point.x, Hit.point.y + 1.0f, Hit.point.z);
+                SetTargetDestination(Target);
+            }
         }
     }
 
