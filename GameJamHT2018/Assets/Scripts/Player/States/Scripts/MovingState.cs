@@ -35,6 +35,7 @@ public class MovingState : State {
         Velocity = new Vector3(0.0f, 0.0f, 0.0f);
         if(Vector3.Distance(transform.position, PreviousPosition) < MathHelper.FloatEpsilon)
         {
+            transform.position = PreviousPosition;
             _controller.TransitionTo<BaseState>();
             return;
         }
