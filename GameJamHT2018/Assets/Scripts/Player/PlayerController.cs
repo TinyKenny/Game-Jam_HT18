@@ -72,11 +72,12 @@ public class PlayerController : Controller {
         SetTargetDestination(transform.position);
         DestroyDestinationMarker();
     }
-
+    /*
     public RaycastHit[] DetectHits(bool addGroundCheck = false)
     {
         Vector3 Direction = Velocity.normalized;
         float distance = Velocity.magnitude * Time.deltaTime;
         Vector3 position = transform.position + (Vector3) Collider.offset;
     }
+    */
 }
