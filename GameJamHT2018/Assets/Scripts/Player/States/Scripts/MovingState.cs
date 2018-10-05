@@ -29,7 +29,8 @@ public class MovingState : State {
         }
         UpdateTargetDestination();
         UpdateMovement();
-        transform.Translate(Velocity);
+        transform.Translate(Velocity, Space.World);
+        Velocity = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     public override void Exit()
@@ -41,7 +42,9 @@ public class MovingState : State {
     private void UpdateMovement()
     {
         Vector3 MovementStep = Vector3.MoveTowards(transform.position, TargetDestination, _controller.MaxSpeed * Time.deltaTime);
-        Velocity = MovementStep - transform.position;
+        Vector3 Movement = MovementStep - transform.position;
+        Movement = new Vector3(Movement.x, 0.0f, Movement.z);
+        Velocity += Movement;
     }
 
     private void UpdateTargetDestination()

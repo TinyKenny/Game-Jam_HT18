@@ -9,10 +9,10 @@ public class PlayerController : Controller {
     public float MaxSpeed = 5.0f;
     public Vector3 Velocity;
     public LayerMask MovementLayers;
+    public CapsuleCollider Collider;
     /*
     public LayerMask CollisionLayers;
     public float Gravity;
-    public Collider collider;
     public float GroundCheckDistance;
     public float InputMagnitudeToMove;
     public MinMaxFloat SlopeAngles;
@@ -71,5 +71,12 @@ public class PlayerController : Controller {
     {
         SetTargetDestination(transform.position);
         DestroyDestinationMarker();
+    }
+
+    public RaycastHit[] DetectHits(bool addGroundCheck = false)
+    {
+        Vector3 Direction = Velocity.normalized;
+        float distance = Velocity.magnitude * Time.deltaTime;
+        Vector3 position = transform.position + (Vector3) Collider.offset;
     }
 }
