@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 136287630572757098}
   - component: {fileID: 114784155637428586}
   - component: {fileID: 114227142496062758}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Camera_tester
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,6 +103,9 @@ MonoBehaviour:
   CurrentState: {fileID: 0}
   MaxSpeed: 5
   Velocity: {x: 0, y: 0, z: 0}
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   Cam: {fileID: 0}
   DestinationMarkerPrefab: {fileID: 1510888578890744, guid: dc55fc655e3900c46a68764481877e9c,
     type: 2}

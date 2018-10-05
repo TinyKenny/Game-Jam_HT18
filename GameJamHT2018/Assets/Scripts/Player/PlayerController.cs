@@ -8,6 +8,7 @@ public class PlayerController : Controller {
 
     public float MaxSpeed = 5.0f;
     public Vector3 Velocity;
+    public LayerMask PlayerLayer;
     /*
     public LayerMask CollisionLayers;
     public float Gravity;
@@ -35,7 +36,9 @@ public class PlayerController : Controller {
             Vector2 MousePos = Input.mousePosition;
             Ray ray = Cam.ScreenPointToRay(MousePos);
             RaycastHit Hit;
-            Physics.Raycast(ray, out Hit);
+            Physics.Raycast(ray, out Hit, PlayerLayer);
+
+            Debug.Log(Hit.collider);
 
             Vector3 Target = new Vector3(Hit.point.x, Hit.point.y + 1.0f, Hit.point.z);
             SetTargetDestination(Target);
