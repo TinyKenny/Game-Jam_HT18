@@ -6,7 +6,7 @@ public class CameraControls : MonoBehaviour {
 
     public Transform player;
     [Range(-2.0f, 2.0f)]
-    public float angle = 0.3f;
+    public float angle = 0.35f;
     public float distanceFromPlayer = 20.0f;
 
     private bool hasPlayer = true;

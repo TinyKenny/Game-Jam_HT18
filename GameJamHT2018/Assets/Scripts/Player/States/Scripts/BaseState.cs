@@ -20,6 +20,7 @@ public class BaseState : State {
     public override void Enter()
     {
         Debug.Log("Entering Base State");
+        TargetDestination = transform.position;
     }
 
     public override void Update()
