@@ -9,6 +9,7 @@ public class MovingState : State {
     private Transform transform { get { return _controller.transform; } }
     private Vector3 TargetDestination { get { return _controller.TargetDestination; } }
     private Vector3 Velocity { get { return _controller.Velocity; } set { _controller.Velocity = value; } }
+    private Vector3 PreviousPosition;
 
     public override void Initialize(Controller owner)
     {
@@ -18,11 +19,12 @@ public class MovingState : State {
     public override void Enter()
     {
         //Debug.Log("Entering Moving State");
+        PreviousPosition = transform.position;
     }
 
     public override void Update()
     {
-        if(Vector3.Distance(transform.position, TargetDestination) < MathHelper.FloatEpsilon || Input.GetKeyDown(KeyCode.S)) //Something...
+        if(Input.GetKeyDown(KeyCode.S) || Vector3.Distance(transform.position, TargetDestination) < MathHelper.FloatEpsilon) //Something...
         {
             _controller.TransitionTo<BaseState>();
             return;
@@ -31,6 +33,12 @@ public class MovingState : State {
         UpdateMovement();
         transform.Translate(Velocity, Space.World);
         Velocity = new Vector3(0.0f, 0.0f, 0.0f);
+        if(Vector3.Distance(transform.position, PreviousPosition) < MathHelper.FloatEpsilon)
+        {
+            _controller.TransitionTo<BaseState>();
+            return;
+        }
+        PreviousPosition = transform.position;
     }
 
     public override void Exit()
