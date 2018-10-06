@@ -10,7 +10,7 @@ public class MovingState : State {
     private Vector3 TargetDestination { get { return _controller.TargetDestination; } }
     private Vector3 Velocity { get { return _controller.Velocity; } set { _controller.Velocity = value; } }
     private float MaxSpeed { get { return _controller.MaxSpeed; } }
-    private Vector3 PreviousPosition;
+    //private Vector3 PreviousPosition;
 
     public override void Initialize(Controller owner)
     {
@@ -20,7 +20,7 @@ public class MovingState : State {
     public override void Enter()
     {
         //Debug.Log("Entering Moving State");
-        PreviousPosition = transform.position;
+        //PreviousPosition = transform.position;
     }
 
     public override void Update()
@@ -49,7 +49,7 @@ public class MovingState : State {
             return;
         }
         */
-        PreviousPosition = transform.position;
+        //PreviousPosition = transform.position;
     }
 
     public override void Exit()
