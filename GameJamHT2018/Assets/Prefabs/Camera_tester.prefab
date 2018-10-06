@@ -130,7 +130,7 @@ MonoBehaviour:
   TargetDestinationMarker: {fileID: 0}
   AttackDirection: {x: 0, y: 0, z: 0}
   AttackTimer: 0
-  ProjectilePrefab: {fileID: 1610476376202332, guid: 96a880658f58cd948bc54efed09a4093,
+  ProjectilePrefab: {fileID: 1548441104114300, guid: 4db30605989005845a6b8d16a1c66eb7,
     type: 2}
 --- !u!136 &136287630572757098
 CapsuleCollider:

@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33427446340558788}
   - component: {fileID: 23592483324458052}
   - component: {fileID: 64230803736152856}
+  - component: {fileID: 114491614444645110}
+  - component: {fileID: 54109868753385098}
   m_Layer: 0
   m_Name: ProjectileDysfunction
   m_TagString: Untagged
@@ -84,6 +86,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1548441104114300}
   m_Mesh: {fileID: 4300000, guid: 05066ea6887b6d241ba31f9dc23d0d4a, type: 3}
+--- !u!54 &54109868753385098
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1548441104114300}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!64 &64230803736152856
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -91,10 +108,21 @@ MeshCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1548441104114300}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 05066ea6887b6d241ba31f9dc23d0d4a, type: 3}
+--- !u!114 &114491614444645110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1548441104114300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c80bebd5826a464ca11655b82215198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
