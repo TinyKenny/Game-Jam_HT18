@@ -23,6 +23,7 @@ public class PlayerController : Controller {
     public GameObject DestinationMarkerPrefab;
     public Vector3 TargetDestination;
     public GameObject TargetDestinationMarker;
+    public Vector3 AttackDirection;
 
     void Start () {
         Cam = Camera.main;
@@ -52,6 +53,16 @@ public class PlayerController : Controller {
 
             }
             */
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                Vector3 Target = new Vector3(Hit.point.x, transform.position.y, Hit.point.z);
+                SetAttackDirection(Target);
+            }
+            else
+            {
+                ClearAttackDirection();
+            }
         }
     }
 
@@ -80,7 +91,18 @@ public class PlayerController : Controller {
         SetTargetDestination(transform.position);
         DestroyDestinationMarker();
     }
+
+    private void SetAttackDirection(Vector3 Target)
+    {
+        ClearTargetDestination();
+        AttackDirection = (Target - transform.position).normalized;
+        transform.LookAt(Target);
+    }
     
+    private void ClearAttackDirection()
+    {
+        AttackDirection = new Vector3(0.0f, 0.0f, 0.0f);
+    }
     /*
     public RaycastHit[] DetectHits(bool addGroundCheck = false)
     {
