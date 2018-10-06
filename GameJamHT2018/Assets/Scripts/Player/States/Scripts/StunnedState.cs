@@ -19,8 +19,13 @@ public class StunnedState : State {
 
     public override void Update()
     {
+        _controller.UpdateAttackTimer();
         //there shouldn't really be much happening here
-        Exit(); //please change this...
+        if (true) //please change this...
+        {
+            _controller.TransitionTo<BaseState>();
+            return;
+        }
     }
 
     public override void Exit()

@@ -7,7 +7,7 @@ public class AttackingState : State {
     private PlayerController _controller;
 
     private float AttackSpeed = 1.0f; //attacks per second;
-    private float TimeSinceAttack = 0.0f;
+    private float AttackTimer { get { return _controller.AttackTimer; } set { _controller.AttackTimer = value; } }
 
     private Transform transform { get { return _controller.transform; } }
     private Vector3 AttackDirection { get { return _controller.AttackDirection; } }
@@ -25,6 +25,8 @@ public class AttackingState : State {
 
     public override void Update ()
     {
+        _controller.UpdateAttackTimer();
+        _controller.CheckForInput();
 		if(AttackDirection.magnitude < MathHelper.FloatEpsilon)
         {
             if (Vector3.Distance(transform.position, TargetDestination) > MathHelper.FloatEpsilon)
@@ -35,7 +37,7 @@ public class AttackingState : State {
             _controller.TransitionTo<BaseState>();
             return;
         }
-
+        Attack();
 	}
 
     public override void Exit()
@@ -43,8 +45,14 @@ public class AttackingState : State {
         
     }
 
-    private void CheckInput()
+    private void Attack()
     {
-
+        if(AttackTimer <= MathHelper.FloatEpsilon)
+        {
+            Debug.Log("Pew");
+            Vector3 ProjectileStartPosition = transform.position + transform.forward;
+            Instantiate(_controller.ProjectilePrefab, ProjectileStartPosition, transform.rotation);
+            AttackTimer = 1 / AttackSpeed;
+        }
     }
 }

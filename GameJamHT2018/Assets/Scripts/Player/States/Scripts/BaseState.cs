@@ -22,7 +22,12 @@ public class BaseState : State {
 
     public override void Update()
     {
+        _controller.UpdateAttackTimer();
         CheckForInput();
+        if(Vector3.Magnitude(_controller.AttackDirection) > MathHelper.FloatEpsilon)
+        {
+            _controller.TransitionTo<AttackingState>();
+        }
         if (Vector3.Distance(transform.position, TargetDestination) > MathHelper.FloatEpsilon)
         {
             _controller.TransitionTo<MovingState>();

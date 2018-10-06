@@ -115,6 +115,7 @@ MonoBehaviour:
   _states:
   - {fileID: 11400000, guid: d54652a2ef8ffbf4c8dc28646a5dcda6, type: 2}
   - {fileID: 11400000, guid: 7c690875c85a7b64787f9b2575761ccc, type: 2}
+  - {fileID: 11400000, guid: 25f0d15822152db43aa426019b7af59e, type: 2}
   CurrentState: {fileID: 0}
   MaxSpeed: 5
   Velocity: {x: 0, y: 0, z: 0}
@@ -127,6 +128,10 @@ MonoBehaviour:
     type: 2}
   TargetDestination: {x: 0, y: 0, z: 0}
   TargetDestinationMarker: {fileID: 0}
+  AttackDirection: {x: 0, y: 0, z: 0}
+  AttackTimer: 0
+  ProjectilePrefab: {fileID: 1610476376202332, guid: 96a880658f58cd948bc54efed09a4093,
+    type: 2}
 --- !u!136 &136287630572757098
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -24,6 +24,9 @@ public class PlayerController : Controller {
     public Vector3 TargetDestination;
     public GameObject TargetDestinationMarker;
     public Vector3 AttackDirection;
+    //public float AttackSpeed = 1.0f; //attacks per second
+    public float AttackTimer = 0.0f;
+    public GameObject ProjectilePrefab;
 
     void Start () {
         Cam = Camera.main;
@@ -31,8 +34,18 @@ public class PlayerController : Controller {
         Collider = GetComponent<CapsuleCollider>();
 	}
 
+    public void UpdateAttackTimer()
+    {
+        AttackTimer -= Time.deltaTime;
+        if (AttackTimer < 0.0f)
+        {
+            AttackTimer = 0.0f;
+        }
+    }
+
     public void CheckForInput()
     {
+        ClearAttackDirection();
         if (Input.GetMouseButton(0))
         {
             Vector2 MousePos = Input.mousePosition;
@@ -59,10 +72,10 @@ public class PlayerController : Controller {
                 Vector3 Target = new Vector3(Hit.point.x, transform.position.y, Hit.point.z);
                 SetAttackDirection(Target);
             }
-            else
-            {
-                ClearAttackDirection();
-            }
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            ClearTargetDestination();
         }
     }
 

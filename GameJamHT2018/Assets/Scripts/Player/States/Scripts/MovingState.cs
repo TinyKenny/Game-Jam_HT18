@@ -25,14 +25,19 @@ public class MovingState : State {
 
     public override void Update()
     {
+        _controller.UpdateAttackTimer();
+        CheckForInput();
         //PreviousPosition = transform.position;
-
-        if(Input.GetKeyDown(KeyCode.S) || Vector3.Distance(transform.position, TargetDestination) < MathHelper.FloatEpsilon) //Something...
+        if(Vector3.Magnitude(_controller.AttackDirection) > MathHelper.FloatEpsilon)
+        {
+            _controller.TransitionTo<AttackingState>();
+            return;
+        }
+        if(Vector3.Distance(transform.position, TargetDestination) < MathHelper.FloatEpsilon) //Something...
         {
             _controller.TransitionTo<BaseState>();
             return;
         }
-        CheckForInput();
         UpdateMovement();
         transform.Translate(Velocity, Space.World);
         //Velocity = new Vector3(0.0f, 0.0f, 0.0f);
