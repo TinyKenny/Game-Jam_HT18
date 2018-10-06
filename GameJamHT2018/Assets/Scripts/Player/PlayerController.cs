@@ -27,24 +27,31 @@ public class PlayerController : Controller {
     void Start () {
         Cam = Camera.main;
         TargetDestination = transform.position;
+        Collider = GetComponent<CapsuleCollider>();
 	}
 
-    public void UpdateTargetDestination()
+    public void CheckForInput()
     {
-        if (Input.GetMouseButtonDown(0)) //Something...
+        if (Input.GetMouseButton(0))
         {
             Vector2 MousePos = Input.mousePosition;
             Ray ray = Cam.ScreenPointToRay(MousePos);
             RaycastHit Hit;
             Physics.Raycast(ray, out Hit, Mathf.Infinity, MovementLayers, QueryTriggerInteraction.UseGlobal);
 
-            Debug.Log(Hit.collider.CompareTag("Ground"));
             if (Hit.collider.CompareTag("Ground"))
             {
                 Vector3 Target = new Vector3(Hit.point.x, transform.position.y, Hit.point.z);
                 SetTargetDestination(Target);
                 transform.LookAt(TargetDestination);
             }
+
+            /*
+            if (Hit.collider.CompareTag("Enemy"))
+            {
+
+            }
+            */
         }
     }
 
@@ -74,13 +81,15 @@ public class PlayerController : Controller {
         DestroyDestinationMarker();
     }
     
-    
+    /*
     public RaycastHit[] DetectHits(bool addGroundCheck = false)
     {
         Vector3 Direction = Velocity.normalized;
-        float distance = Velocity.magnitude * Time.deltaTime;
-        Vector3 position1 = transform.position + Collider.center + Vector3.up * -Collider.height * 0.5f;
-        Vector3 Position2 = position1 + Vector3.up * Collider.height;
+        //float distance = Velocity.magnitude * Time.deltaTime;
+        float distance = MaxSpeed * Time.deltaTime;
+        Vector3 position1 = transform.position + Collider.center + Vector3.up * (-Collider.height * 0.5f + Collider.radius);
+        Vector3 Position2 = position1 + Vector3.up * (Collider.height - Collider.radius * 2);
+        Debug.Log(position1);
         //List<RaycastHit> hits = Physics.CapsuleCastAll(position1, Position2, Collider.radius, Direction, distance);
         RaycastHit[] hitsArray = Physics.CapsuleCastAll(position1, Position2, Collider.radius, Direction, distance);
         List<RaycastHit> hits = new List<RaycastHit>();
@@ -100,6 +109,6 @@ public class PlayerController : Controller {
         }
         return hits.ToArray();
     }
-    
+    */
     
 }

@@ -22,7 +22,7 @@ public class BaseState : State {
 
     public override void Update()
     {
-        UpdateTargetDestination();
+        CheckForInput();
         if (Vector3.Distance(transform.position, TargetDestination) > MathHelper.FloatEpsilon)
         {
             _controller.TransitionTo<MovingState>();
@@ -35,9 +35,14 @@ public class BaseState : State {
         //Debug.Log("Exiting Base State");
     }
 
-    private void UpdateTargetDestination()
+    private void CheckForInput()
     {
-        _controller.UpdateTargetDestination();
+        _controller.CheckForInput();
+    }
+
+    private void CheckInput()
+    {
+        
     }
 
     private void ClearTargetDestination()
