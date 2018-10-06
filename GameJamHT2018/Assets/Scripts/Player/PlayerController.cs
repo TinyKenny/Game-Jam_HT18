@@ -74,7 +74,7 @@ public class PlayerController : Controller {
         DestroyDestinationMarker();
     }
     
-    /*
+    
     public RaycastHit[] DetectHits(bool addGroundCheck = false)
     {
         Vector3 Direction = Velocity.normalized;
@@ -91,9 +91,15 @@ public class PlayerController : Controller {
         RaycastHit[] groundHits = Physics.CapsuleCastAll(position1, Position2, Collider.radius, Vector3.down, 1.0f);
         for(int i = 0; i < hits.Count; i++)
         {
-            RaycastHit saftyHit = Physics.Linecast(position1, hits[i].point);
+            RaycastHit safetyHit;
+            Physics.Linecast(transform.position + Collider.center, hits[i].point, out safetyHit);
+            if (safetyHit.collider != null)
+            {
+                hits[i] = safetyHit;
+            }
         }
+        return hits.ToArray();
     }
-    */
+    
     
 }

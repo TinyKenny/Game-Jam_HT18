@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33654591882685790}
   - component: {fileID: 23040496690065728}
   - component: {fileID: 136287630572757098}
-  - component: {fileID: 114784155637428586}
   - component: {fileID: 114227142496062758}
   - component: {fileID: 54287091373746464}
   m_Layer: 10
@@ -51,7 +50,7 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1774601447884314}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -100,7 +99,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &114227142496062758
 MonoBehaviour:
@@ -122,27 +121,12 @@ MonoBehaviour:
   MovementLayers:
     serializedVersion: 2
     m_Bits: 513
+  Collider: {fileID: 0}
   Cam: {fileID: 0}
   DestinationMarkerPrefab: {fileID: 1510888578890744, guid: dc55fc655e3900c46a68764481877e9c,
     type: 2}
   TargetDestination: {x: 0, y: 0, z: 0}
   TargetDestinationMarker: {fileID: 0}
---- !u!114 &114784155637428586
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1774601447884314}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c132e40ec2059644eaf8a48bc11dca5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  destinationMarkerPrefab: {fileID: 1510888578890744, guid: dc55fc655e3900c46a68764481877e9c,
-    type: 2}
 --- !u!136 &136287630572757098
 CapsuleCollider:
   m_ObjectHideFlags: 1

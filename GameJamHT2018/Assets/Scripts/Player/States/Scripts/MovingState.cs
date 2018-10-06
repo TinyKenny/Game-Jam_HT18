@@ -24,6 +24,11 @@ public class MovingState : State {
 
     public override void Update()
     {
+        //PreviousPosition = transform.position;
+
+        //use detecthits to determine if we are colliding with something or not
+
+
         if(Input.GetKeyDown(KeyCode.S) || Vector3.Distance(transform.position, TargetDestination) < MathHelper.FloatEpsilon) //Something...
         {
             _controller.TransitionTo<BaseState>();
@@ -32,7 +37,7 @@ public class MovingState : State {
         UpdateTargetDestination();
         UpdateMovement();
         transform.Translate(Velocity, Space.World);
-        Velocity = new Vector3(0.0f, 0.0f, 0.0f);
+        //Velocity = new Vector3(0.0f, 0.0f, 0.0f);
         if(Vector3.Distance(transform.position, PreviousPosition) < MathHelper.FloatEpsilon)
         {
             transform.position = PreviousPosition;
@@ -53,7 +58,7 @@ public class MovingState : State {
         Vector3 MovementStep = Vector3.MoveTowards(transform.position, TargetDestination, _controller.MaxSpeed * Time.deltaTime);
         Vector3 Movement = MovementStep - transform.position;
         Movement = new Vector3(Movement.x, 0.0f, Movement.z);
-        Velocity += Movement;
+        Velocity = Movement;
     }
 
     private void UpdateTargetDestination()
