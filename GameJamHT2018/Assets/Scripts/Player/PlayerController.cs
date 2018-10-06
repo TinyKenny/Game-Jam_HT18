@@ -60,12 +60,12 @@ public class PlayerController : Controller {
                 transform.LookAt(TargetDestination);
             }
 
-            /*
+            
             if (Hit.collider.CompareTag("Enemy"))
             {
-
+                SetAttackDirection(Hit.transform.position);
             }
-            */
+            
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
