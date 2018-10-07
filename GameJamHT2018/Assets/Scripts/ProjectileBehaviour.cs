@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProjectileBehaviour : MonoBehaviour {
 
     private float ProjectileSpeed = 7.5f;
-    private float Range = 10.0f;
+    private float Range = 25.0f;
     private int BaseDamage = 1;
 
     private Vector3 OriginPosition;
