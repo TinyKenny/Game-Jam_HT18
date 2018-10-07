@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33654591882685790}
   - component: {fileID: 23040496690065728}
   - component: {fileID: 136287630572757098}
+  - component: {fileID: 114798180048205174}
   - component: {fileID: 114227142496062758}
   - component: {fileID: 54287091373746464}
   m_Layer: 10
@@ -129,9 +130,30 @@ MonoBehaviour:
   TargetDestination: {x: 0, y: 0, z: 0}
   TargetDestinationMarker: {fileID: 0}
   AttackDirection: {x: 0, y: 0, z: 0}
+  AttackDamage: 1
+  AttackSpeed: 1
   AttackTimer: 0
   ProjectilePrefab: {fileID: 1548441104114300, guid: 4db30605989005845a6b8d16a1c66eb7,
     type: 2}
+  UpgradePoints: 0
+  CharacterSheet: {fileID: 0}
+  UpgradePointNum: {fileID: 0}
+  StatMaxHealthNum: {fileID: 0}
+  StatDamageNum: {fileID: 0}
+  StatAttackSpeedNum: {fileID: 0}
+--- !u!114 &114798180048205174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1774601447884314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264c652c511ac5b49b6744e64ae68e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 3
+  Health: 0
 --- !u!136 &136287630572757098
 CapsuleCollider:
   m_ObjectHideFlags: 1

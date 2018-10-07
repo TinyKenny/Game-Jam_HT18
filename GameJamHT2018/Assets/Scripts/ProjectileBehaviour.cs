@@ -6,9 +6,10 @@ public class ProjectileBehaviour : MonoBehaviour {
 
     private float ProjectileSpeed = 7.5f;
     private float Range = 10.0f;
-    private int Damage = 1;
+    private int BaseDamage = 1;
 
     private Vector3 OriginPosition;
+    private PlayerController Shooter;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,11 @@ public class ProjectileBehaviour : MonoBehaviour {
         transform.Translate(new Vector3(0.0f, 0.0f, 1.0f) * ProjectileSpeed * Time.deltaTime);
 	}
 
+    public void SetShooter(PlayerController shooter)
+    {
+        Shooter = shooter;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
@@ -31,7 +37,14 @@ public class ProjectileBehaviour : MonoBehaviour {
             Destructible HealthScript = other.GetComponent<Destructible>();
             if (HealthScript != null)
             {
-                HealthScript.Health -= Damage;
+                if (Shooter != null)
+                {
+                    HealthScript.TakeDamageFrom(Shooter);
+                }
+                else
+                {
+                    HealthScript.TakeGeneralDamage(BaseDamage);
+                }
             }
             Destroy(gameObject);
         }
