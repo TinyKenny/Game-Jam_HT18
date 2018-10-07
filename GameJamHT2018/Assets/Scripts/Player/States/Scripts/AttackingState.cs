@@ -6,7 +6,8 @@ using UnityEngine;
 public class AttackingState : State {
     private PlayerController _controller;
 
-    private float AttackSpeed = 1.0f; //attacks per second;
+    //private float AttackSpeed = 1.0f; //attacks per second;
+    private float AttackSpeed { get { return _controller.AttackSpeed; } }
     private float AttackTimer { get { return _controller.AttackTimer; } set { _controller.AttackTimer = value; } }
 
     private Transform transform { get { return _controller.transform; } }
@@ -51,7 +52,8 @@ public class AttackingState : State {
         {
             Debug.Log("Pew");
             Vector3 ProjectileStartPosition = transform.position + transform.forward;
-            Instantiate(_controller.ProjectilePrefab, ProjectileStartPosition, transform.rotation);
+            GameObject Projectile = Instantiate(_controller.ProjectilePrefab, ProjectileStartPosition, transform.rotation);
+            Projectile.GetComponent<ProjectileBehaviour>().SetShooter(_controller);
             AttackTimer = 1 / AttackSpeed;
         }
     }

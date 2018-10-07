@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : Controller {
 
@@ -24,14 +25,28 @@ public class PlayerController : Controller {
     public Vector3 TargetDestination;
     public GameObject TargetDestinationMarker;
     public Vector3 AttackDirection;
-    //public float AttackSpeed = 1.0f; //attacks per second
+    public int AttackDamage = 1;
+    public float AttackSpeed = 1.0f; //attacks per second
     public float AttackTimer = 0.0f;
     public GameObject ProjectilePrefab;
+    public int UpgradePoints = 0;
+    
+    public Canvas CharacterSheet;
+    public Text UpgradePointNum;
+    public Text StatMaxHealthNum;
+    public Text StatDamageNum;
+    public Text StatAttackSpeedNum;
 
     void Start () {
         Cam = Camera.main;
         TargetDestination = transform.position;
         Collider = GetComponent<CapsuleCollider>();
+        CharacterSheet.enabled = false;
+        UpgradePointNum.text = UpgradePoints.ToString();
+        StatMaxHealthNum.text = GetComponent<Destructible>().MaxHealth.ToString();
+        StatDamageNum.text = AttackDamage.ToString();
+        StatAttackSpeedNum.text = AttackSpeed.ToString();
+
 	}
 
     public void UpdateAttackTimer()
@@ -45,37 +60,51 @@ public class PlayerController : Controller {
 
     public void CheckForInput()
     {
-        ClearAttackDirection();
-        if (Input.GetMouseButton(0))
+        if (CharacterSheet.enabled)
         {
-            Vector2 MousePos = Input.mousePosition;
-            Ray ray = Cam.ScreenPointToRay(MousePos);
-            RaycastHit Hit;
-            Physics.Raycast(ray, out Hit, Mathf.Infinity, MovementLayers, QueryTriggerInteraction.UseGlobal);
-
-            if (Hit.collider.CompareTag("Ground"))
+            if (Input.GetKeyDown(KeyCode.C))
             {
-                Vector3 Target = new Vector3(Hit.point.x, transform.position.y, Hit.point.z);
-                SetTargetDestination(Target);
-                transform.LookAt(TargetDestination);
-            }
-
-            
-            if (Hit.collider.CompareTag("Enemy"))
-            {
-                SetAttackDirection(Hit.transform.position);
-            }
-            
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                Vector3 Target = new Vector3(Hit.point.x, transform.position.y, Hit.point.z);
-                SetAttackDirection(Target);
+                CharacterSheet.enabled = false;
             }
         }
-        else if (Input.GetKey(KeyCode.S))
+        else
         {
-            ClearTargetDestination();
+            ClearAttackDirection();
+            if (Input.GetMouseButton(0))
+            {
+                Vector2 MousePos = Input.mousePosition;
+                Ray ray = Cam.ScreenPointToRay(MousePos);
+                RaycastHit Hit;
+                Physics.Raycast(ray, out Hit, Mathf.Infinity, MovementLayers, QueryTriggerInteraction.UseGlobal);
+
+                if (Hit.collider.CompareTag("Ground"))
+                {
+                    Vector3 Target = new Vector3(Hit.point.x, transform.position.y, Hit.point.z);
+                    SetTargetDestination(Target);
+                    transform.LookAt(TargetDestination);
+                }
+
+
+                if (Hit.collider.CompareTag("Enemy"))
+                {
+                    SetAttackDirection(Hit.transform.position);
+                }
+
+
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    Vector3 Target = new Vector3(Hit.point.x, transform.position.y, Hit.point.z);
+                    SetAttackDirection(Target);
+                }
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                ClearTargetDestination();
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                CharacterSheet.enabled = true;
+            }
         }
     }
 
@@ -116,6 +145,49 @@ public class PlayerController : Controller {
     {
         AttackDirection = new Vector3(0.0f, 0.0f, 0.0f);
     }
+
+    public void LevelUp()
+    {
+        UpgradePoints += 1;
+        UpgradePointNum.text = UpgradePoints.ToString();
+    }
+
+    public void UpgradeMaxHealth()
+    {
+        Debug.Log("calles!");
+        if (UpgradePoints >= 1)
+        {
+            Destructible PlayerHealthScript = gameObject.GetComponent<Destructible>();
+            PlayerHealthScript.MaxHealth += 1;
+            PlayerHealthScript.Health = PlayerHealthScript.MaxHealth;
+            StatMaxHealthNum.text = GetComponent<Destructible>().MaxHealth.ToString();
+            UpgradePoints -= 1;
+            UpgradePointNum.text = UpgradePoints.ToString();
+        }
+    }
+
+    public void UpgradeAttackSpeed()
+    {
+        if (UpgradePoints >= 1)
+        {
+            AttackSpeed += 0.25f;
+            StatAttackSpeedNum.text = AttackSpeed.ToString();
+            UpgradePoints -= 1;
+            UpgradePointNum.text = UpgradePoints.ToString();
+        }
+    }
+
+    public void UpgradeDamage()
+    {
+        if (UpgradePoints >= 1)
+        {
+            AttackDamage += 1;
+            StatDamageNum.text = AttackDamage.ToString();
+            UpgradePoints -= 1;
+            UpgradePointNum.text = UpgradePoints.ToString();
+        }
+    }
+
     /*
     public RaycastHit[] DetectHits(bool addGroundCheck = false)
     {

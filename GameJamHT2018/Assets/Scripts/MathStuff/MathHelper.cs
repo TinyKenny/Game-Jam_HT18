@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class MathHelper {
-    public const float FloatEpsilon = 0.001f;
+    public const float FloatEpsilon = 0.01f;
 
     public static int Sign(float value)
     {
