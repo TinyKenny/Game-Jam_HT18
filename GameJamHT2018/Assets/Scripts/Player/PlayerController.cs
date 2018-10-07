@@ -103,6 +103,8 @@ public class PlayerController : Controller {
             }
             if (Input.GetKeyDown(KeyCode.C))
             {
+                ClearAttackDirection();
+                ClearTargetDestination();
                 CharacterSheet.enabled = true;
             }
         }
