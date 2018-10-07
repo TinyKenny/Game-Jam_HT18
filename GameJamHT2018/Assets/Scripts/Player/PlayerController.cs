@@ -172,7 +172,7 @@ public class PlayerController : Controller {
     {
         if (UpgradePoints >= 1)
         {
-            AttackSpeed += 0.25f;
+            AttackSpeed += 0.1f;
             StatAttackSpeedNum.text = AttackSpeed.ToString();
             UpgradePoints -= 1;
             UpgradePointNum.text = UpgradePoints.ToString();
