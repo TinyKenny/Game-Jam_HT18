@@ -46,4 +46,10 @@ public class Destructible : MonoBehaviour {
         }
     }
 
+    public void IncreaseMaxHealth(int MaxHealthIncrease)
+    {
+        MaxHealth += MaxHealthIncrease;
+        Health = MaxHealth;
+    }
+
 }
